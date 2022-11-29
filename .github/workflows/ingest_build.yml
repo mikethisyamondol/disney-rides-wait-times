@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'ingest_lambda'
+      - 'ingest_lambda/**'
 
 jobs:
   sync:
