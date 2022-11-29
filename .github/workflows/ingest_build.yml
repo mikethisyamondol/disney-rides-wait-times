@@ -28,6 +28,6 @@ jobs:
         AWS_PROFILE: default
         AWS_DEFAULT_REGION: us-east-2
       run: |
-        aws s3 cp ./code/lambda_function.zip s3://mthisyamondol/ingest_lambda_function.zip
+        aws s3 cp ./code/ingest_lambda_function.zip s3://mthisyamondol/ingest_lambda_function.zip
         aws lambda update-function-code --function-name disneyridesdata --s3-bucket mthisyamondol --s3-key ingest_lambda_function.zip --region us-east-2
 
