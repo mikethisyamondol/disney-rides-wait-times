@@ -1,0 +1,33 @@
+name: deploy-ingest-lambda
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - 'ingest_lambda'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup AWS
+      run: |
+          mkdir ./.aws
+          touch ./.aws/credentials
+          echo '${{ secrets.AWS_CREDENTIALS_FILE }}' > ./.aws/credentials
+    - name: zip
+      run: |
+          cd ingest_lambda
+          zip -r ingest_lambda_function.zip *
+
+    - name: sync to s3
+      env:
+        AWS_SHARED_CREDENTIALS_FILE: ./.aws/credentials
+        AWS_PROFILE: default
+        AWS_DEFAULT_REGION: us-east-2
+      run: |
+        aws s3 cp ./code/lambda_function.zip s3://mthisyamondol/ingest_lambda_function.zip
+        aws lambda update-function-code --function-name disneyridesdata --s3-bucket mthisyamondol --s3-key ingest_lambda_function.zip --region us-east-2
+
