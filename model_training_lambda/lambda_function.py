@@ -1,7 +1,7 @@
 import boto3
 from boto3.dynamodb.conditions import Key
 import pandas as pd 
-from prophet import Prophet
+# from prophet import Prophet
 
 
 def lambda_handler(event, context):
