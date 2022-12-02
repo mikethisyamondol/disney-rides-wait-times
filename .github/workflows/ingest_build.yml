@@ -19,7 +19,7 @@ jobs:
     - name: zip
       run: |
           cd ingest_lambda
-          pip install --target ./package requests
+          pip install --target ./ requests
           zip -r ingest_lambda_function.zip *
 
     - name: sync to s3
