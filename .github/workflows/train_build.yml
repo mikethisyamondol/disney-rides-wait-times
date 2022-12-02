@@ -16,19 +16,16 @@ jobs:
           mkdir ./.aws
           touch ./.aws/credentials
           echo '${{ secrets.AWS_CREDENTIALS_FILE }}' > ./.aws/credentials
-    - name: zip
-      run: |
-          cd model_training_lambda
-          pip install --target . numpy==1.17
-          pip install --target . pandas prophet
-          zip -r train_lambda_function.zip *
 
-    - name: sync to s3
+    - name: ECR
       env:
         AWS_SHARED_CREDENTIALS_FILE: ./.aws/credentials
         AWS_PROFILE: default
         AWS_DEFAULT_REGION: us-east-2
       run: |
-        aws s3 cp ./model_training_lambda/train_lambda_function.zip s3://mthisyamondol/disney_rides_scripts/train_lambda_function.zip
-        aws lambda update-function-code --function-name disneymodeltrain --s3-bucket mthisyamondol --s3-key disney_rides_scripts/train_lambda_function.zip --region us-east-2
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 359409690900.dkr.ecr.us-east-2.amazonaws.com
+        docker build -t disneyrides-training .
+        docker tag disneyrides-training:latest 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+        docker push 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+
 

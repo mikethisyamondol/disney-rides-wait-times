@@ -49,9 +49,7 @@ def lambda_handler(event, context):
     #     for ride in land["rides"]:
     #         if ride["is_open"] == True:
     #             ride_dict = {}
-    #             ride_dict['key'] = land["name"].replace(" ", "")+ride['name'].replace(" ", "")+str(ride['last_updated'][:10])+str(ride['last_updated'][11:13])
-    #             ride_dict['date'] = ride['last_updated'][:10]
-    #             ride_dict['hour'] = ride['last_updated'][11:13]
+    #             ride_dict['dt'] = str(ride['last_updated'][:10])+ ' ' + str(ride['last_updated'][11:13]) + ':00:00'}
     #             ride_dict['land'] = land["name"]
     #             ride_dict['ride_name'] = ride['name']
     #             ride_dict['wait_time'] = str(ride['wait_time'])
