@@ -23,9 +23,7 @@ def lambda_handler(event, context):
         for ride in land["rides"]:
             if ride["is_open"] == True:
                 ride_dict = {}
-                ride_dict['key'] = {'S': land["name"].replace(" ", "")+ride['name'].replace(" ", "")+str(ride['last_updated'][:10])+str(ride['last_updated'][11:13])}
-                ride_dict['date'] = {'S': ride['last_updated'][:10]}
-                ride_dict['hour'] = {'S': ride['last_updated'][11:13]}
+                ride_dict['dt'] = {'S': str(ride['last_updated'][:10])+ ' ' + str(ride['last_updated'][11:13]) + ':00:00'}
                 ride_dict['land'] = {'S': land["name"]}
                 ride_dict['ride_name'] = {'S': ride['name']}
                 ride_dict['wait_time'] = {'S': str(ride['wait_time'])}
@@ -35,7 +33,7 @@ def lambda_handler(event, context):
     dynamodb = boto3.client('dynamodb')
     
     for ride in rides:
-        dynamodb.put_item(TableName='disneyrides', Item=ride)
+        dynamodb.put_item(TableName='disneyridetimes', Item=ride)
 
 #-------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------
@@ -69,7 +67,7 @@ def lambda_handler(event, context):
 
 
     # s3 = boto3.resource('s3')        
-    # s3.Bucket('bucketname').upload_file(filename,f'disneydata/{filename}')
+    # s3.Bucket('mthisyamondol').upload_file(filename,f'disneydata/{filename}')
     
     
     # TODO implement
