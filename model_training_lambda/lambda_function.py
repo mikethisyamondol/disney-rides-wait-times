@@ -44,7 +44,7 @@ def lambda_handler(event, context):
         )
 
         df = pd.read_json(response['Item'])
-        print(df.head(6))
+        print(df.head(5))
 
 
 

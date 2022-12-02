@@ -19,7 +19,7 @@ jobs:
     - name: zip
       run: |
           cd model_training_lambda
-          pip install --target . numpy==1.22.4 pandas==1.3.4 prophet
+          pip install --target . numpy==1.17 pandas prophet
           zip -r train_lambda_function.zip *
 
     - name: sync to s3
