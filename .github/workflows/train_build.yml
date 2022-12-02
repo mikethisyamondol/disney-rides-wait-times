@@ -26,5 +26,6 @@ jobs:
         docker build -t disneyrides-training ./model_training_lambda
         docker tag disneyrides-training:latest 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
         docker push 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+        aws lambda update-function-code --function-name disneymodeltrain --image-uri 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
 
 
