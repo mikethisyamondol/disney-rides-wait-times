@@ -50,7 +50,7 @@ def lambda_handler(event, context):
         # print(response['Items'])
 
         data = response['Items']
-        df = pd.DataFrame.from_dict(data)
+        df = pd.json_normalize(data)
         print(df)
         # df_int = df[['dt', 'wait_time']]
         # df_clean = df_int.rename(columns={'dt': 'ds', 'wait_time': 'y'})
