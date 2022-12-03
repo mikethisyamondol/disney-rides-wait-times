@@ -54,12 +54,19 @@ def lambda_handler(event, context):
                                                         f'{pred_date} 22:00:00',]})
                 forecast = m.predict(future_date)
                 pred = {
-                            "ds": {'S': forecast['ds']},
-                            "yhat": {'S': forecast["yhat"]},
-                            "ride_name": {'S': o}
+                            "ds": 'forecast['ds'],
+                            "yhat": forecast["yhat"],
+                            "ride_name": o.replace(".pkl", "")
                         }
-            
-                pred_list.append(pred)
+                df_pred = pd.DataFrame(pred)
+                for index, row in df_pred.iterrows():
+                    pred = {
+                        "ds": {'S':row['ds']}
+                        "yhat": {'S':row['yhat']}
+                        "ride_name": {'S':row['ride_name']}
+                    }
+
+                    pred_list.append(pred)
         except:
             continue
     
