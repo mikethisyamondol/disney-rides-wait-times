@@ -13,10 +13,12 @@ def lambda_handler(event, context):
     for j in range(1,31):
         date_list.append(f"2022-12-{j}")
     #date_list.append(f"2022-1-{j}")
-    dynamodb = boto3.client('dynamodb')
     s3 = boto3.client('s3')
+    dynamodb = boto3.client('dynamodb')
+
     bucket = 'mthisyamondol'
-    folder = '/disney_rides_models'
+    folder = 'disney_rides_models'
+
     s3_r = boto3.resource("s3")
     s3_bucket = s3_r.Bucket(bucket)
     files_in_s3 = [f.key.split(folder + "/")[1] for f in s3_bucket.objects.filter(Prefix=folder).all()]
@@ -62,5 +64,6 @@ def lambda_handler(event, context):
  # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Lambda successfully completed!')
+        'body': json.dumps('Lambda successfully completed!'),
+        'files': files_in_s3
     }
