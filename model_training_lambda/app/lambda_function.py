@@ -52,18 +52,18 @@ def lambda_handler(event, context):
         data = response['Items']
         df = pd.DataFrame.from_dict(data)
         print(df)
-        # df_int = df[['dt', 'wait_time']]
-        # df_clean = df_int.rename(columns={'dt': 'ds', 'wait_time': 'y'})
-        # m = Prophet();
-        # m.fit(df_clean);
+        df_int = df[['dt', 'wait_time']]
+        df_clean = df_int.rename(columns={'dt': 'ds', 'wait_time': 'y'})
+        m = Prophet();
+        m.fit(df_clean);
 
-        # pkl_filename = ride.replace(" ", "")+'_model.pkl'
-        # with open('/tmp/'+pkl_filename, 'wb') as file:
-        #     pickle.dump(m, file)
+        pkl_filename = ride.replace(" ", "")+'_model.pkl'
+        with open('/tmp/'+pkl_filename, 'wb') as file:
+            pickle.dump(m, file)
         
-        # # pickle_model = pickle.dumps(m)
-        # s3 = boto3.resource('s3')        
-        # s3.Bucket('mthisyamondol').upload_file('/tmp/'+pkl_filename,'disney_rides_models/'+pkl_filename)
+        # pickle_model = pickle.dumps(m)
+        s3 = boto3.resource('s3')        
+        s3.Bucket('mthisyamondol').upload_file('/tmp/'+pkl_filename,'disney_rides_models/'+pkl_filename)
 
         
 
