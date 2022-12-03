@@ -30,7 +30,7 @@ def lambda_handler(event, context):
     # cwd = os.getcwd()
     # os.chdir('/tmp/') 
     for o in files_in_s3:
-        m = pickle.loads(s3_r.Bucket(bucket).objects.filter(Prefix=folder).Object(o).get()['Body'].read())
+        m = pickle.loads(s3_r.Bucket(bucket).Object(folder+'/'+o).get()['Body'].read())
         # s3.download_file(bucket, folder+'/'+o, '/tmp/'+o)
         # print(contents.decode("utf-8"))
         # m = pickle.load(open(cwd+'/tmp/'+o,'rb'))
