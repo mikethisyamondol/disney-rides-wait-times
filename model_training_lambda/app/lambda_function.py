@@ -46,7 +46,8 @@ def lambda_handler(event, context):
         filtering_exp = Key('ride_name').eq(ride)
         response = table.query(KeyConditionExpression=filtering_exp)
 
-        data = json.loads(str(response))
+        print(response)
+        
 
         # df = pd.read_json(response['Item'])
         # print(df.head(6))
@@ -56,6 +57,5 @@ def lambda_handler(event, context):
  # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Lambda successfully completed!'),
-        'data': data
+        'body': json.dumps('Lambda successfully completed!')
     }
