@@ -37,11 +37,10 @@ def lambda_handler(event, context):
             'The Magic Carpets of Aladdin']
     
     for ride in rides:
+        filtering_exp = Key('ride_name').eq(ride)
         response = client.query(
         TableName = 'disneyridetimes',
-        ExpressionAttributeNames={
-        ride : 'ride_name'
-    }
+        KeyConditionExpression=filtering_exp
         )
 
         df = pd.read_json(response['Item'])
