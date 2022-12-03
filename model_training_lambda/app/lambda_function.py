@@ -72,7 +72,6 @@ def lambda_handler(event, context):
  # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Lambda successfully completed!'),
-        'df': df
+        'body': json.dumps('Lambda successfully completed!')
         # 'response': response['Items']
     }
