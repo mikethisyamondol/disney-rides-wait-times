@@ -3,6 +3,7 @@ from boto3.dynamodb.conditions import Key
 import pandas as pd 
 import json
 from prophet import Prophet
+import pickle
 
 
 def lambda_handler(event, context):
@@ -50,10 +51,17 @@ def lambda_handler(event, context):
 
         data = response['Items']
         df = pd.DataFrame.from_dict(data)
-        df = df[['dt', 'wait_time']].rename(columns={'dt': 'ds', 'wait_time': 'y'})
+        df_ = df[['dt', 'wait_time']].rename(columns={'dt': 'ds', 'wait_time': 'y'})
         m = Prophet();
-        m.fit(df);
+        m.fit(df_);
 
+        pkl_filename = ride+'_model.pkl'
+        with open(pkl_filename, 'wb') as file:
+            pickle.dump(model, file)
+        
+        pickle_model = pickle.dumps(model)
+        s3 = boto3.resource('s3')        
+        s3.Bucket('mthisyamondol').upload_file(pickle_model,'disney_rides_models/'+pkl_filename)
 
         
 
