@@ -46,7 +46,7 @@ def lambda_handler(event, context):
         filtering_exp = Key('ride_name').eq(ride)
         response = table.query(KeyConditionExpression=filtering_exp)
 
-        print(response)
+        print(response['Items'])
 
 
         # df = pd.read_json(response['Item'])
@@ -58,5 +58,5 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': json.dumps('Lambda successfully completed!'),
-        'response': response
+        'response': response['Items']
     }
