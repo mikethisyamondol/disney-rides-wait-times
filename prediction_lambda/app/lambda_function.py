@@ -59,20 +59,21 @@ def lambda_handler(event, context):
                             "ride_name": o.replace("-model.pkl", "")
                         }
                 df_pred = pd.DataFrame(pred)
+                print(df_pred)
                 for index, row in df_pred.iterrows():
                     pred_dict = {
                         "ds": {'S' :str(row['ds'])},
                         "yhat": {'S' :str(row['yhat'])},
                         "ride_name": {'S' :row['ride_name']}
                     }
-                    print(pred_dict)
-                    dynamodb = boto3.client('dynamodb')
-                    dynamodb.put_item(TableName='disneyridepreds', Item=pred_dict);
-                    # pred_list.append(pred)
+                    # print(pred_dict)
+                    # dynamodb = boto3.client('dynamodb')
+                    # dynamodb.put_item(TableName='disneyridepreds', Item=pred_dict);
+                    pred_list.append(pred_dict)
         except:
             continue
     
-    # dynamodb.put_item(TableName='disneyridepreds', Item=pred_list)
+    dynamodb.put_item(TableName='disneyridepreds', Item=pred_list)
 
 
 
