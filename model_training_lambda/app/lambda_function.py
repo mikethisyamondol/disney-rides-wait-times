@@ -46,7 +46,7 @@ def lambda_handler(event, context):
         filtering_exp = Key('ride_name').eq(ride)
         response = table.query(KeyConditionExpression=filtering_exp)
 
-        data = json.loads(response)
+        data = json.loads(str(response))
 
         # df = pd.read_json(response['Item'])
         # print(df.head(6))
