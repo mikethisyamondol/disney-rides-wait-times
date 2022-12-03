@@ -55,9 +55,9 @@ def lambda_handler(event, context):
         m = Prophet();
         m.fit(df_);
 
-        pkl_filename = ride+'_model.pkl'
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(model, file)
+        pkl_filename = ride.replace(" ", "")+'_model.pkl'
+        # with open('/tmp/'+pkl_filename, 'wb') as file:
+        #     pickle.dump(model, file)
         
         pickle_model = pickle.dumps(model)
         s3 = boto3.resource('s3')        
