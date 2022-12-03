@@ -39,9 +39,7 @@ def lambda_handler(event, context):
     for ride in rides:
         response = client.get_item(
             TableName = 'disneyridetimes'
-            Key={
-                'ride_name': {'S' : str(ride)}
-            }
+            Key={'ride_name': {'S' : str(ride)}}
         )
 
         df = pd.read_json(response['Item'])
