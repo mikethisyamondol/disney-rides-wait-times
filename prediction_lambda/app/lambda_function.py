@@ -15,10 +15,15 @@ def lambda_handler(event, context):
     #date_list.append(f"2022-1-{j}")
     dynamodb = boto3.client('dynamodb')
     s3 = boto3.client('s3')
-    bucket='bucket_name'
-    result = s3.list_objects(Bucket = 'mthisyamondol', Prefix='/disney_rides_models/')
-    print(result)
-    print(result.get('Contents'))
+    bucket = 'mthisyamondol'
+    s3_r = boto3.resource("s3")
+    s3_bucket = s3_r.Bucket(bucket)
+    files_in_s3 = [f.key.split(folder + "/")[1] for f in s3_bucket.objects.filter(Prefix=folder).all()]
+    print(files_in_s3)
+
+    # result = s3.list_objects(Bucket = bucket, Prefix='/disney_rides_models/')
+    # print(result)
+    # print(result.get('Contents'))
     # for o in result.get('Contents'):
     #     s3.download_file(bucket, object_key, f'/tmp/{o}')
     #     # print(contents.decode("utf-8"))
