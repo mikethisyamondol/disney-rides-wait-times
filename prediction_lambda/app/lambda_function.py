@@ -27,11 +27,11 @@ def lambda_handler(event, context):
     # result = s3.list_objects(Bucket = bucket, Prefix='/disney_rides_models/')
     # print(result)
     # print(result.get('Contents'))
-    cwd = os.getcwd()
+    # cwd = os.getcwd()
     for o in files_in_s3:
-        s3.download_file(bucket, folder+'/'+o, cwd+'/tmp/'+o)
+        s3.download_file(bucket, folder+'/'+o, './tmp/'+o)
         # print(contents.decode("utf-8"))
-        m = pickle.load(open(cwd+'/tmp/'+o,'rb'))
+        m = pickle.load(open(cwd+'./tmp/'+o,'rb'))
 
         for pred_date in date_list:
             future_date = pd.DataFrame({'ds':[f'{pred_date} 8:00:00',
