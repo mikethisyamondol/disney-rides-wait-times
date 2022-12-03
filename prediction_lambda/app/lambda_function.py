@@ -66,7 +66,7 @@ def lambda_handler(event, context):
                         "ride_name": {'S' :row['ride_name']}
                     }
                 
-                dynamodb.put_item(TableName='disneyridepreds', Item=pred);
+                    dynamodb.put_item(TableName='disneyridepreds', Item=pred);
                     # pred_list.append(pred)
         except:
             continue
