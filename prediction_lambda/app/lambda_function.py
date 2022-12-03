@@ -61,8 +61,8 @@ def lambda_handler(event, context):
                 df_pred = pd.DataFrame(pred)
                 for index, row in df_pred.iterrows():
                     pred = {
-                        "ds": {'S':row['ds']}
-                        "yhat": {'S':row['yhat']}
+                        "ds": {'S':row['ds']},
+                        "yhat": {'S':row['yhat']},
                         "ride_name": {'S':row['ride_name']}
                     }
 
