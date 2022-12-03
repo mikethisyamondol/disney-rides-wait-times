@@ -48,9 +48,9 @@ def lambda_handler(event, context):
 
         # print(response['Items'])
 
-        data = response['Item']
+        data = response['Items']
         df = pd.DataFrame.from_dict(data)
-        print(df.head(6))
+        
 
 
 
