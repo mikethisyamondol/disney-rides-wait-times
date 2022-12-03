@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     date_list = []
     pred_list = []
-    for j in range(1,14):
+    for j in range(1,31):
         date_list.append(f"2022-12-{j}")
     #date_list.append(f"2022-1-{j}")
     s3 = boto3.client('s3')
@@ -62,7 +62,7 @@ def lambda_handler(event, context):
                 for index, row in df_pred.iterrows():
                     pred = {
                         "ds": {'S':row['ds']},
-                        "yhat": {'S':row['yhat']},
+                        "yhat": {'N':row['yhat']},
                         "ride_name": {'S':row['ride_name']}
                     }
 
