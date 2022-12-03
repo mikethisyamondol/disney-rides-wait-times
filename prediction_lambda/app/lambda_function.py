@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     dynamodb = boto3.client('dynamodb')
     s3 = boto3.client('s3')
     bucket = 'mthisyamondol'
-    folder = '/disney_rides_models/'
+    folder = '/disney_rides_models'
     s3_r = boto3.resource("s3")
     s3_bucket = s3_r.Bucket(bucket)
     files_in_s3 = [f.key.split(folder + "/")[1] for f in s3_bucket.objects.filter(Prefix=folder).all()]
