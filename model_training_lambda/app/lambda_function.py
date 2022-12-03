@@ -51,9 +51,10 @@ def lambda_handler(event, context):
 
         data = response['Items']
         df = pd.DataFrame.from_dict(data)
-        df_ = df[['dt', 'wait_time']].rename(columns={'dt': 'ds', 'wait_time': 'y'})
+        df_int = df[['dt', 'wait_time']]
+        df_clean = df_int.rename(columns={'dt': 'ds', 'wait_time': 'y'})
         m = Prophet();
-        m.fit(df_);
+        m.fit(df_clean);
 
         pkl_filename = ride.replace(" ", "")+'_model.pkl'
         with open('/tmp/'+pkl_filename, 'wb') as file:
