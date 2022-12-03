@@ -73,7 +73,7 @@ def lambda_handler(event, context):
         except:
             continue
     for p in pred_list:
-        dynamodb.put_item(TableName='disneyridepreds', Item=pred_list)
+        dynamodb.put_item(TableName='disneyridepreds', Item=p)
 
 
 
