@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     dynamodb = boto3.client('dynamodb')
     s3 = boto3.client('s3')
     bucket='bucket_name'
-    result = s3.list_objects(Bucket = mthisyamondol, Prefix='/disney_rides_models/')
+    result = s3.list_objects(Bucket = 'mthisyamondol', Prefix='/disney_rides_models/')
     for o in result.get('Contents'):
         s3.download_file(bucket, object_key, f'/tmp/{o}')
         # print(contents.decode("utf-8"))
