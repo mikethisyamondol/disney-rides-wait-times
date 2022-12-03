@@ -54,7 +54,7 @@ def lambda_handler(event, context):
                                                         f'{pred_date} 22:00:00',]})
                 forecast = m.predict(future_date)
                 pred = {
-                            "ds": 'forecast['ds'],
+                            "ds": forecast['ds'],
                             "yhat": forecast["yhat"],
                             "ride_name": o.replace(".pkl", "")
                         }
