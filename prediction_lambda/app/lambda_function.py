@@ -65,7 +65,8 @@ def lambda_handler(event, context):
                         "yhat": {'S' :str(row['yhat'])},
                         "ride_name": {'S' :row['ride_name']}
                     }
-                
+                    print(pred)
+                    dynamodb = boto3.client('dynamodb')
                     dynamodb.put_item(TableName='disneyridepreds', Item=pred);
                     # pred_list.append(pred)
         except:
