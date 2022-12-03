@@ -38,7 +38,7 @@ def lambda_handler(event, context):
     
     for ride in rides:
         response = client.get_item(
-        TableName = 'disneyridetimes'
+        TableName = 'disneyridetimes',
         Key={'ride_name': {'S' : str(ride)}}
         )
 
