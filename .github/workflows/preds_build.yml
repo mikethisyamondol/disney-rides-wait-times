@@ -27,6 +27,5 @@ jobs:
         docker tag disneyrides-training:latest 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
         docker push 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
         aws lambda update-function-code --function-name disneymodelpreds --image-uri 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
-        export TMPDIR=/tmp
 
 
