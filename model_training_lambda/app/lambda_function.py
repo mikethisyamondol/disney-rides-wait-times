@@ -6,8 +6,8 @@ import pandas as pd
 
 def lambda_handler(event, context):
     client = boto3.client('dynamodb', region_name='us-east-2')
-    # ddb = boto3.resource('dynamodb', region_name='us-east-2')
-    # table = ddb.Table('disneyridetimes')
+    ddb = boto3.resource('dynamodb', region_name='us-east-2')
+    table = ddb.Table('disneyridetimes')
 
     rides = ['Disney Festival of Fantasy Parade',
             'The Barnstormer',
@@ -37,11 +37,13 @@ def lambda_handler(event, context):
             'The Magic Carpets of Aladdin']
     
     for ride in rides:
+        # filtering_exp = Key('ride_name').eq(ride)
+        # response = client.query(
+        # TableName = 'disneyridetimes',
+        # KeyConditionExpression=filtering_exp
+        # )
         filtering_exp = Key('ride_name').eq(ride)
-        response = client.query(
-        TableName = 'disneyridetimes',
-        KeyConditionExpression=filtering_exp
-        )
+        response = table.query(KeyConditionExpression=filtering_exp)
 
         df = pd.read_json(response['Item'])
         print(df.head(6))
