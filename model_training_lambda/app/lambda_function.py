@@ -59,7 +59,7 @@ def lambda_handler(event, context):
         # with open('/tmp/'+pkl_filename, 'wb') as file:
         #     pickle.dump(model, file)
         
-        pickle_model = pickle.dumps(model)
+        pickle_model = pickle.dumps(m)
         s3 = boto3.resource('s3')        
         s3.Bucket('mthisyamondol').upload_file(pickle_model,'disney_rides_models/'+pkl_filename)
 
