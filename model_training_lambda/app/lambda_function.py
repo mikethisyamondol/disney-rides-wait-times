@@ -49,8 +49,8 @@ def lambda_handler(event, context):
         print(response['Items'])
 
 
-        # df = pd.read_json(response['Item'])
-        # print(df.head(6))
+        df = pd.DataFrame(response['Item'])
+        print(df.head(6))
 
 
 
@@ -58,5 +58,5 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': json.dumps('Lambda successfully completed!'),
-        'response': response['Items']
+        # 'response': response['Items']
     }
