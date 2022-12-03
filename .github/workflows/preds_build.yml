@@ -1,0 +1,31 @@
+name: deploy-preds-lambda
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'prediction_lambda/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup AWS
+      run: |
+          mkdir ./.aws
+          touch ./.aws/credentials
+          echo '${{ secrets.AWS_CREDENTIALS_FILE }}' > ./.aws/credentials
+    - name: ECR
+      env:
+        AWS_SHARED_CREDENTIALS_FILE: ./.aws/credentials
+        AWS_PROFILE: default
+        AWS_DEFAULT_REGION: us-east-2
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 359409690900.dkr.ecr.us-east-2.amazonaws.com
+        docker build -t disneyrides-training ./prediction_lambda
+        docker tag disneyrides-training:latest 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+        docker push 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+        aws lambda update-function-code --function-name disneymodelpreds --image-uri 359409690900.dkr.ecr.us-east-2.amazonaws.com/disneyrides-training:latest
+
+
