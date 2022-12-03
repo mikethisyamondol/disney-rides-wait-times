@@ -60,14 +60,14 @@ def lambda_handler(event, context):
                         }
                 df_pred = pd.DataFrame(pred)
                 for index, row in df_pred.iterrows():
-                    pred = {
+                    pred_dict = {
                         "ds": {'S' :str(row['ds'])},
                         "yhat": {'S' :str(row['yhat'])},
                         "ride_name": {'S' :row['ride_name']}
                     }
-                    print(pred)
+                    print(pred_dict)
                     dynamodb = boto3.client('dynamodb')
-                    dynamodb.put_item(TableName='disneyridepreds', Item=pred);
+                    dynamodb.put_item(TableName='disneyridepreds', Item=pred_dict);
                     # pred_list.append(pred)
         except:
             continue
