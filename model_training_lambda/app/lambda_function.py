@@ -37,9 +37,9 @@ def lambda_handler(event, context):
             'The Magic Carpets of Aladdin']
     
     for ride in rides:
-        response = client.get_item(
+        response = client.query(
         TableName = 'disneyridetimes',
-        Key={'ride_name': {'S' : str(ride)}}
+        IndexName=ride
         )
 
         df = pd.read_json(response['Item'])
