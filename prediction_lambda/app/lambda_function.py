@@ -56,21 +56,21 @@ def lambda_handler(event, context):
                 pred = {
                             "ds": forecast['ds'],
                             "yhat": forecast["yhat"],
-                            "ride_name": o.replace(".pkl", "")
+                            "ride_name": o.replace("-model.pkl", "")
                         }
                 df_pred = pd.DataFrame(pred)
                 for index, row in df_pred.iterrows():
                     pred = {
-                        "ds": {'S':str(row['ds'])},
-                        "yhat": {'S':str(row['yhat'])},
-                        "ride_name": {'S':row['ride_name']}
+                        "ds": {'S' :str(row['ds'])},
+                        "yhat": {'S' :str(row['yhat'])},
+                        "ride_name": {'S' :row['ride_name']}
                     }
-
-                    pred_list.append(pred)
+                    dynamodb.put_item(TableName='disneyridepreds', Item=pred);
+                    # pred_list.append(pred)
         except:
             continue
     
-    dynamodb.put_item(TableName='disneyridepreds', Item=pred_list)
+    # dynamodb.put_item(TableName='disneyridepreds', Item=pred_list)
 
 
 
