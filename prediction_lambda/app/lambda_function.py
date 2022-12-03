@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     date_list = []
     pred_list = []
-    for j in range(1,31):
+    for j in range(1,15):
         date_list.append(f"2022-12-{j}")
     #date_list.append(f"2022-1-{j}")
     s3 = boto3.client('s3')
