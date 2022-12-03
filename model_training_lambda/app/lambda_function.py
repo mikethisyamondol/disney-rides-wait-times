@@ -57,7 +57,7 @@ def lambda_handler(event, context):
 
         pkl_filename = ride.replace(" ", "")+'_model.pkl'
         with open('/tmp/'+pkl_filename, 'wb') as file:
-            pickle.dump(model, file)
+            pickle.dump(m, file)
         
         # pickle_model = pickle.dumps(m)
         s3 = boto3.resource('s3')        
