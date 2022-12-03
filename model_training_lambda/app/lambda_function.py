@@ -2,7 +2,7 @@ import boto3
 from boto3.dynamodb.conditions import Key
 import pandas as pd 
 import json
-# from prophet import Prophet
+from prophet import Prophet
 
 
 def lambda_handler(event, context):
@@ -50,6 +50,11 @@ def lambda_handler(event, context):
 
         data = response['Items']
         df = pd.DataFrame.from_dict(data)
+        df = df[['dt', 'wait_time']].rename(columns={'dt': 'ds', 'wait_time': 'y'})
+        m = Prophet();
+        m.fit(df);
+
+
         
 
 
