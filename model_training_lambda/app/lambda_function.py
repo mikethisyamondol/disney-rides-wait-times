@@ -46,10 +46,10 @@ def lambda_handler(event, context):
         filtering_exp = Key('ride_name').eq(ride)
         response = table.query(KeyConditionExpression=filtering_exp)
 
-        print(response['Items'])
+        # print(response['Items'])
 
-
-        df = pd.DataFrame(response['Item'])
+        data = response['Item']
+        df = pd.DataFrame.from_dict(data)
         print(df.head(6))
 
 
