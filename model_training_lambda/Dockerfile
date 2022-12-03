@@ -11,5 +11,5 @@ RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 COPY ./app/lambda_function.py ${LAMBDA_TASK_ROOT}
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
-ENTRYPOINT [ "/usr/local/bin/python", "-m", "awslambdaric" ]
-CMD [ ./app/lambda_function.py ] 
+ENTRYPOINT [ "./app/lambda_function.py", "-m", "awslambdaric" ]
+CMD [ "app.handler" ] 
