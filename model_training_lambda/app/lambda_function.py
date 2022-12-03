@@ -47,7 +47,7 @@ def lambda_handler(event, context):
         response = table.query(KeyConditionExpression=filtering_exp)
 
         print(response)
-        
+
 
         # df = pd.read_json(response['Item'])
         # print(df.head(6))
@@ -57,5 +57,6 @@ def lambda_handler(event, context):
  # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Lambda successfully completed!')
+        'body': json.dumps('Lambda successfully completed!'),
+        'response': response
     }
