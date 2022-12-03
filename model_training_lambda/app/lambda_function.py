@@ -49,7 +49,7 @@ def lambda_handler(event, context):
 
         # print(response['Items'])
 
-        data = response['Items']
+        data = str(response['Items'])
         df = pd.json_normalize(data)
         print(df)
         # df_int = df[['dt', 'wait_time']]
