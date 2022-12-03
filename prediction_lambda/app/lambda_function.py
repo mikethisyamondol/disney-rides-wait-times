@@ -28,10 +28,11 @@ def lambda_handler(event, context):
     # print(result)
     # print(result.get('Contents'))
     # cwd = os.getcwd()
+    os.chdir('/tmp/')
     for o in files_in_s3:
-        s3.download_file(bucket, folder+'/'+o, './tmp/'+o)
+        s3.download_file(bucket, folder+'/'+o, '/tmp/'+o)
         # print(contents.decode("utf-8"))
-        m = pickle.load(open(cwd+'./tmp/'+o,'rb'))
+        m = pickle.load(open(cwd+'/tmp/'+o,'rb'))
 
         for pred_date in date_list:
             future_date = pd.DataFrame({'ds':[f'{pred_date} 8:00:00',
