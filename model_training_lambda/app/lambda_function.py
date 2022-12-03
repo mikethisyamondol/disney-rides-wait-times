@@ -5,9 +5,9 @@ import pandas as pd
 
 
 def lambda_handler(event, context):
-    ddb_client = boto3.client('dynamodb', region_name='us-east-2')
-    ddb = boto3.resource('dynamodb', region_name='us-east-2')
-    table = ddb.Table('disneyridetimes')
+    client = boto3.client('dynamodb', region_name='us-east-2')
+    # ddb = boto3.resource('dynamodb', region_name='us-east-2')
+    # table = ddb.Table('disneyridetimes')
 
     rides = ['Disney Festival of Fantasy Parade',
             'The Barnstormer',
@@ -37,9 +37,10 @@ def lambda_handler(event, context):
             'The Magic Carpets of Aladdin']
     
     for ride in rides:
-        response = table.get_item(
+        response = client.get_item(
+            TableName = 'disneyridetimes'
             Key={
-                'ride_name': ride
+                'ride_name': str(ride)
             }
         )
 
