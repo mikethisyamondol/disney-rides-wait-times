@@ -56,12 +56,12 @@ def lambda_handler(event, context):
         m.fit(df_);
 
         pkl_filename = ride.replace(" ", "")+'_model.pkl'
-        # with open('/tmp/'+pkl_filename, 'wb') as file:
-        #     pickle.dump(model, file)
+        with open('/tmp/'+pkl_filename, 'wb') as file:
+            pickle.dump(model, file)
         
-        pickle_model = pickle.dumps(m)
+        # pickle_model = pickle.dumps(m)
         s3 = boto3.resource('s3')        
-        s3.Bucket('mthisyamondol').upload_file(pickle_model,'disney_rides_models/'+pkl_filename)
+        s3.Bucket('mthisyamondol').upload_file('/tmp/'+pkl_filename,'disney_rides_models/'+pkl_filename)
 
         
 
