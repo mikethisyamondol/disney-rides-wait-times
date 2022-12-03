@@ -39,7 +39,9 @@ def lambda_handler(event, context):
     for ride in rides:
         response = client.query(
         TableName = 'disneyridetimes',
-        IndexName=ride
+        ExpressionAttributeNames={
+        ride : 'ride_name'
+    }
         )
 
         df = pd.read_json(response['Item'])
