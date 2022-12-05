@@ -13,7 +13,7 @@ def lambda_handler(event, context):
     # date_list = []
     pred_list = []
     start = datetime.datetime.now().strftime("%Y-%m-%d")
-    plus_one = datetime.datetime.now() + datetime.timedelta(days=7)
+    plus_one = datetime.datetime.now() + datetime.timedelta(days=5)
     end = plus_one.strftime("%Y-%m-%d") 
     d_list = pd.date_range(start, end)
     date_list = [d.strftime("%Y-%m-%d") for d in d_list]
