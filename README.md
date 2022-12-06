@@ -4,4 +4,4 @@
 # disney-rides-wait-times
 
 ### AWS Architecture
-![AWS_Architecture.PNG](images/AWS_Architecture.PNG)
+![AWS_Architecture.PNG](images/AWS_Architecture.png)
